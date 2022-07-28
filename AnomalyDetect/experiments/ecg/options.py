@@ -1,4 +1,4 @@
-#/home/tcr/anaconda3/envs/tf1.14/bin/python3.6 -u /home/tcr/storage/HXH/MultiModal/experiments/ecg/main.py
+
 
 import argparse
 import os
