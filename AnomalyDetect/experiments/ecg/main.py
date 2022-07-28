@@ -8,10 +8,6 @@ from dataloader.UCR_dataloader import load_data, EM_FK
 
 import numpy as np
 
-#nohup /home/tcr/anaconda3/bin/python3.8  /home/tcr/storage/HXH/MultiModal/experiments/ecg/main.py >/dev/null 2>&1 &
-#nohup /home/g817_u2/anaconda3/envs/torch1.4/bin/python3.6  /home/g817_u2/XunHua/MultiModal/experiments/ecg/main.py >/dev/null 2>&1 &
-#nohup /home/tcr/anaconda3/envs/tf1.14/bin/python3.6  /home/tcr/storage/HXH/MultiModal/experiments/ecg/main.py >/dev/null 2>&1 &
-
 
 device = torch.device("cuda:0" if
 torch.cuda.is_available() else "cpu")
@@ -41,8 +37,7 @@ SEEDS=[
 if __name__ == '__main__':
 
     results_dir='./log1'
-    #results_dir = '/home/tcr/storage/HXH/MultiModal/experiments/ecg/log10'
-    #results_dir = '/home/g817_u2/XunHua/MultiModal/experiments/ecg/log10'
+  
 
     opt.outf = results_dir
     if not os.path.exists(results_dir):
@@ -169,7 +164,7 @@ if __name__ == '__main__':
 
                             print('Testing')
 
-                            model.G.load_state_dict(torch.load('/home/tcr/storage/HXH/MultiModal/experiments/ecg/Model_CheckPoint/{}_{}_{}_{}.pkl'.format(opt.model, dataset_name, normal_idx, seed)))
+                            model.G.load_state_dict(torch.load('/Model_CheckPoint/{}_{}_{}_{}.pkl'.format(opt.model, dataset_name, normal_idx, seed)))
                             ap_test, auc_test, _, _ = model.test()
                             epoch_max_point = 0
 
