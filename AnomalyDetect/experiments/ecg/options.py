@@ -33,12 +33,6 @@ class Options():
         self.parser.add_argument('--data_ECG', default='../datasets/ECG', help='path to ECG')
         #self.parser.add_argument('--data_UCR',default='../datasets/UCRArchive_2018',help='path to UCRdataset')
         self.parser.add_argument('--data_UCR',default='/home/tcr/storage/HXH/MultiModal/experiments/datasets/UCRArchive_2018',help='path to UCRdataset')
-        # self.parser.add_argument('--data_UCR',default='/home/g817_u2/XunHua/MultiModal/experiments/datasets/UCRArchive_2018',help='path to UCRdataset')
-        # self.parser.add_argument('--data_DECG',default='/home/g817_u2/XunHua/MultiModal/experiments/datasets/DECG',help='path to UCRdataset')
-
-        self.parser.add_argument('--data_CPSC',default='/home/tcr/storage/HXH/MultiModal/experiments/datasets/CSPC_ECG')
-        self.parser.add_argument('--data_ZZU_MI',default='/home/tcr/storage/HXH/MultiModal/experiments/datasets/zzu_MI')
-        self.parser.add_argument('--data_DECG',default='/home/tcr/storage/HXH/MultiModal/experiments/datasets/DECG')
 
 
 
@@ -83,89 +77,7 @@ class Options():
         self.parser.add_argument('--normalize', type=bool, default='True')
         self.parser.add_argument('--seed', type=int, default=0)
 
-        # ganomaly
-        self.parser.add_argument('--extralayers', type=int, default=0, help='Number of extra layers on gen and disc')
-        self.parser.add_argument('--decoder_isize', type=int, default=32, help='input sequence size.')
-        self.parser.add_argument('--resume', default='', help="path to checkpoints (to continue training)")
-        self.parser.add_argument('--w_con', type=float, default=50, help='Reconstruction loss weight')
-        self.parser.add_argument('--w_enc', type=float, default=1, help='Encoder loss weight.')
-        self.parser.add_argument('--save_image_freq', type=int, default=100, help='frequency of saving real and fake images')
-        self.parser.add_argument('--load_weights', action='store_true', help='Load the pretrained weights')
-        self.parser.add_argument('--save_test_images', action='store_true', help='Save test images for demo.')
-        self.parser.add_argument('--metric', type=str, default='roc', help='Evaluation metric.')
-        self.parser.add_argument('--display_id', type=int, default=0, help='window id of the web display')
-        self.parser.add_argument('--display', action='store_true', help='Use visdom.')
-
-
-
-
-        ### DeepSVDD###
-        self.parser.add_argument('--dataset_name', default='UCR', help='run dataloader')
-        self.parser.add_argument('--net_name', default='ucr_CNN',
-                                 choices=['ucr_CNN', 'ucr_OSCNN',
-                                          'ucr_OSCNN_RP', 'ucr_OSCNN_FFT', 'ucr_CNN_FFT',
-                                          'cifar10_LeNet', 'ucr_CNN_FFT_CAT', 'ucr_CNN_FFT_SIN', 'AE_PyG'],
-                                 help='Model name.')
-        self.parser.add_argument('--n_epochs', type=int, default=1000, help='Number of epochs to train.')
-
-        #self.parser.add_argument('--xp_path', default='./log1', help='run dataloader')
-        # self.parser.add_argument('--data_path', default='./datasets/UCRArchive_2018', help='Dataset path')
-
-        #self.parser.add_argument('--data_path', default='../datasets/UCRArchive_2018', help='Dataset path')
-        # self.parser.add_argument('--data_path', default='./datasets/MI', help='Dataset path')
-        #self.parser.add_argument('--data_path', default='../datasets/DECG', help='Dataset path')
-
-
-        self.parser.add_argument('--load_config', default=None, help='Config JSON-file path (default: None).')
-        self.parser.add_argument('--load_model', default=None, help='Model file path (default: None).')
-        self.parser.add_argument('--objective', default='one-class', choices=['one-class', 'soft-boundary'],
-                                 help='Specify Deep SVDD objective ("one-class" or "soft-boundary").')
-        self.parser.add_argument('--nu', type=float, default=0.1,
-                                 help='Deep SVDD hyperparameter nu (must be 0 < nu <= 1).')
-        # self.parser.add_argument('--device', type=str, default='cuda:0',
-        #                          #help='Computation device to use ("cpu", "cuda", "cuda:2", etc.).')
-        #self.parser.add_argument('--seed', type=int, default=-1, help='Set seed. If -1, use randomization.')
-        self.parser.add_argument('--optimizer_name', choices=['adam'], default='adam',
-                                 help='Name of the optimizer to use for Deep SVDD network training.')
-        #self.parser.add_argument('--lr', type=float, default=0.01,
-                                 #help='Initial learning rate for Deep SVDD network training. Default=0.001')
-        self.parser.add_argument('--lr_milestone', type=list, default=[0],
-                                 help='Lr scheduler milestones at which lr is multiplied by 0.1. Can be multiple and must be increasing.')
-        #self.parser.add_argument('--batch_size', type=int, default=32, help='Batch size for mini-batch training.')
-        self.parser.add_argument('--weight_decay', type=float, default=1e-6,
-                                 help='Weight decay (L2 penalty) hyperparameter for Deep SVDD objective.')
-        self.parser.add_argument('--pretrain', type=bool, default=False,
-                                 help='Pretrain neural network parameters via autoencoder.')
-        self.parser.add_argument('--ae_optimizer_name', choices=['adam'], default='adam',
-                                 help='Name of the optimizer to use for autoencoder pretraining.')
-        self.parser.add_argument('--ae_lr', type=float, default=0.0001,
-                                 help='Initial learning rate for autoencoder pretraining. Default=0.001')
-        self.parser.add_argument('--ae_n_epochs', type=int, default=400, help='Number of epochs to train autoencoder.')
-        self.parser.add_argument('--ae_lr_milestone', type=list, default=[0],
-                                 help='Lr scheduler milestones at which lr is multiplied by 0.1. Can be multiple and must be increasing.')
-        self.parser.add_argument('--ae_batch_size', type=int, default=64,
-                                 help='Batch size for mini-batch autoencoder training.')
-        self.parser.add_argument('--ae_weight_decay', type=float, default=1e-6,
-                                 help='Weight decay (L2 penalty) hyperparameter for autoencoder objective.')
-        self.parser.add_argument('--n_jobs_dataloader', type=int, default=0,
-                                 help='Number of workers for data loading. 0 means that the data will be loaded in the main process.')
-        self.parser.add_argument('--normal_class', type=int, default=0,
-                                 help='Specify the normal class of the dataloader (all other classes are considered anomalous).')
-
-        #####GOAD#####
-
-        # args参数
-
-        self.parser.add_argument('--n_rots', default=256, type=int)
-        self.parser.add_argument('--d_out', default=32, type=int)
-        self.parser.add_argument('--exp', default='affine', type=str)
-        self.parser.add_argument('--c_pr', default=0, type=int)
-        self.parser.add_argument('--m', default=1, type=float)
-        self.parser.add_argument('--lmbda', default=0.1, type=float)
-        #self.parser.add_argument('--eps', default=0, type=float)
-
-
-        ##
+        
         # Train
         self.parser.add_argument('--print_freq', type=int, default=50, help='frequency of showing training results on console')
         self.parser.add_argument('--beta1', type=float, default=0.5, help='momentum term of adam')
