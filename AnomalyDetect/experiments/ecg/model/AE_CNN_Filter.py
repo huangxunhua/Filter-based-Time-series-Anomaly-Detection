@@ -247,13 +247,11 @@ class ModelTrainer(nn.Module):
         KF_EM = KF.ft.em(X=latent_batch, n_iter=10)
 
         TC = self.compute(KF_EM.transition_covariance)
-        OC= self.compute(KF_EM.observation_covariance)
-        ISC = self.compute(KF_EM.initial_state_covariance)
         TM = self.compute(KF_EM.transition_matrices)
-        ISM = [np.abs(KF_EM.initial_state_mean)]
+      
 
 
-        KF_EM = EM_FK(initial_value_guess, initial_state_covariance, observation_covariance, TC, transition_matrix)   #observation_covariance 影响最大
+        KF_EM = EM_FK(initial_value_guess, initial_state_covariance, observation_covariance, TC, TM)   #observation_covariance 影响最大
 
 
         return KF_EM#
