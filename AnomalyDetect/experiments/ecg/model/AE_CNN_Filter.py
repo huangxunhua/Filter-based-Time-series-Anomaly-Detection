@@ -251,7 +251,7 @@ class ModelTrainer(nn.Module):
       
 
 
-        KF_EM = EM_FK(initial_value_guess, initial_state_covariance, observation_covariance, TC, TM)   #observation_covariance 影响最大
+        KF_EM = EM_FK(initial_value_guess, initial_state_covariance, observation_covariance, TC, TM) 
 
 
         return KF_EM#
