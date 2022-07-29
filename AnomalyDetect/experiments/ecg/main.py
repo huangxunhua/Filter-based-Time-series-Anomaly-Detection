@@ -9,7 +9,7 @@ from dataloader.UCR_dataloader import load_data, EM_FK
 import numpy as np
 
 
-device = torch.device("cuda:0" if
+device = torch.device("cuda:1" if
 torch.cuda.is_available() else "cpu")
 #torch.cuda.set_per_process_memory_fraction(0.05, 1)
 
